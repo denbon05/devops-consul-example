@@ -1,0 +1,12 @@
+
+- name: Gather facts from consul_server
+  ansible.builtin.setup:
+  delegate_to: "server1"
+  delegate_facts: true
+  register: consul_server_facts
+
+- set_fact:
+    consul_server_ip: "{{ consul_server_facts['ansible_facts']['ansible_all_ipv4_addresses'] | ansible.netcommon.ipaddr('10.110.0.0/24') | first }}"
+
+- debug:
+    var: consul_server_ip

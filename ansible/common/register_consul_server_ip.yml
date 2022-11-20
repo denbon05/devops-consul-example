@@ -6,5 +6,8 @@
 
 - set_fact:
     consul_server_ip: "{{ consul_server_facts.ansible_facts.ansible_docker0.ipv4.address }}"
+
 # - debug:
-#     var: consul_server_facts.ansible_facts.ansible_docker0.ipv4.address
+#     var: consul_server_facts.ansible_facts
+
+- copy: content="{{ consul_server_facts.ansible_facts }}" dest=/tmp/consul_server_facts.json

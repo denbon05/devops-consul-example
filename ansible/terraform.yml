@@ -1,0 +1,28 @@
+---
+- name: Apply terraform
+  hosts: local
+  vars:
+    terraform_dir: '{{ playbook_dir }}/../terraform'
+    pvt_key: ~/.ssh/id_rsa
+    infra_state: 'present'
+  tasks:
+    - name: Init terraform infrastructure
+      register: infra
+      community.general.terraform:
+        state: '{{ infra_state }}'
+        project_path: '{{ terraform_dir }}'
+        variables:
+          do_token: '{{ do_token }}'
+          pvt_key: '{{ pvt_key }}'
+        force_init: true
+
+    - name: Check infra
+      ansible.builtin.debug:
+        var: infra
+
+    - name: Add hosts
+      ansible.builtin.template:
+        src: templates/hosts.j2
+        dest: hosts.ini
+        mode: '0644'
+      changed_when: infra_state == 'present'

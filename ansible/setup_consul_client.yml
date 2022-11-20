@@ -10,4 +10,4 @@
         recreate: yes
         network_mode: host
         container_default_behavior: no_defaults
-        command: "agent -node=client-1 -join={{ consul_server_ip }} -advertise={{ advertise_ip }}"
+        command: 'agent -node=client-1 -join={{ consul_server_ip }} -advertise={{ advertise_ip }}'

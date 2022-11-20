@@ -17,7 +17,8 @@ setup-consul-client:
 register-consul-service:
 	ansible-playbook -i hosts.ini register_consul_service.yml
 
-# BEGIN
-test:
-	echo 'success'
-# END
+encrypt-vault:
+	@ sh scripts/encrypt-vault.sh
+
+decrypt-vault:
+	@ sh scripts/decrypt-vault.sh

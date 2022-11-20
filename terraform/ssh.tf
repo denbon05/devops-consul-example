@@ -4,5 +4,5 @@
 #   public_key = file("~/.ssh/id_rsa.pub")
 # }
 data "digitalocean_ssh_key" "terraform" {
-  name = "key"
+  name = "t480"
 }
